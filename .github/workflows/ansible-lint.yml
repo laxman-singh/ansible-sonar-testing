@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run ansible-lint
-        uses: laxman-singh/ansible-sonar-testing
+        uses: laxman-singh/ansible-sonar-testing@main
