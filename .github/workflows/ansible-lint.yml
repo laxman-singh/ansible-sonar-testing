@@ -1,12 +1,25 @@
-# .github/workflows/ansible-lint.yml
 name: ansible-lint
 on:
   pull_request:
     branches: ["main"]
 jobs:
   build:
-    name: Ansible Lint # Naming the build is important to use it as a status check
+    name: Ansible Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Run ansible-lint
-        uses: ansible/ansible-lint@v6.17.0
+      - name: Checkout Gity Repo
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          cache: pip
+          python-version: "3.11"
+          
+      - name: Install ansible-lint
+        shell: bash
+        run: pip install ansible-lint
+        
+      - name: Run ansible-lint on playbooks
+        shell: bash
+        run: ansible-lint ${{ inputs.path }}
